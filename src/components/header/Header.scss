@@ -1,0 +1,19 @@
+#TiemKiemKhoaHoc {
+    border: solid 1px blue;
+    padding: 8px;
+    width: 300px;
+    border-radius: 5px;
+    &:focus {
+        border: solid 1px blue;
+        outline: none;
+    }
+}
+#DanhMucKhoaHoc {
+    border: solid 1px blue;
+    padding: 8px;
+    border-radius: 5px;
+}
+#wrapper-sign button{
+    border: none;
+    outline: none;
+}

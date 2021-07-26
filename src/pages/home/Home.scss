@@ -1,0 +1,18 @@
+.home-banner {
+  button:first-child {
+    padding: 7px;
+    width: 150px;
+    border: none;
+    outline: none;
+  }
+  button:nth-child(2) {
+    border: 2px solid;
+    padding: 7px;
+    width: 150px;
+    outline: none;
+  }
+  #imdUnder {
+    background: url(../../assets/img/animation2.gif) no-repeat center center;
+    background-size: cover;
+  }
+}

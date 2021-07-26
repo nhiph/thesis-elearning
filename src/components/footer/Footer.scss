@@ -1,0 +1,43 @@
+.footer-col1 {
+  .para-second-col1 {
+    input {
+      border: solid 1px gray;
+      border-radius: 4px;
+      padding: 5px;
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+    button {
+      padding: 6px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+    }
+  }
+}
+.footer-col2 {
+  input {
+    border-radius: 3px;
+  }
+  button {
+    padding: 6px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+  }
+}
+.footer-col3 {
+  .footer-facebook {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 150, 0.3)), url(../../assets/img//bg-footer.jpg) no-repeat center center;
+    background-size: cover;
+    .btn-facebook {
+        border-radius: 4px;
+    }
+    .footer-below {
+      height: 230px;
+      overflow-y: auto;
+    }
+  }
+}
