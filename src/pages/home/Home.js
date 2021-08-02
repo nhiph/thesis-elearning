@@ -1,23 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Home.scss";
-import frame2 from "../../assets/img/radial_frame2.png";
-import ringcode from "../../assets/img/radial_ringcode.png";
 import Banner from "./Banner";
 import {useEffect} from 'react'
-import { getListCourseAction } from "../../redux/actions/CourseAction";
+import { getListCourseAction, registerCourseAction } from "../../redux/actions/CourseAction";
 import {useSelector, useDispatch} from 'react-redux'
 import { NavLink } from "react-router-dom";
+import { Pagination } from 'antd';
 
 export default function Home() {
-
   const {courseList} = useSelector(state => state.CourseReducer)
-
+  const {userLogin} = useSelector(state => state.UserReducer)
+  const [current, setCurrent] = useState(1)
   const dispatch = useDispatch()
 
   useEffect(() => {
     let action = getListCourseAction();
     dispatch(action)
   }, [])
+
+  const dangKyKhoaHoc = (maKhoaHoc, taiKhoan) => {
+    let infoDangKy = {
+      maKhoaHoc,
+      taiKhoan
+    }
+    let action = registerCourseAction(infoDangKy)
+    dispatch(action) 
+  }
 
   const renderCourseList = () => {
     return courseList?.map((course, idx) => {
@@ -46,6 +54,7 @@ export default function Home() {
             </NavLink>
             <NavLink 
               to={`/detail/${course.maKhoaHoc}`}
+              onClick={() => dangKyKhoaHoc(course.maKhoaHoc, userLogin.taiKhoan)}
               className="ml-2 bg-yellow-400 px-6 py-4 text-xl text-gray-700 font-bold">
               Đăng ký
             </NavLink>
@@ -81,9 +90,16 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* 6 items/page */}
+      {(idx+1)%6 === 0 ? <br /> : ''}
     </div>
     })
   }
+
+  const onChange = page => {
+    console.log(page);
+    setCurrent(page);
+  };
 
   return (
     <div className="home">
@@ -97,6 +113,9 @@ export default function Home() {
 
           <div className="flex flex-wrap -m-4">
             {renderCourseList()}
+          </div>
+          <div className="flex justify-center my-6">
+          <Pagination current={current} onChange={onChange} total={50} />
           </div>
         </div>
       </section>

@@ -1,14 +1,7 @@
-import {USER_LOGIN} from '../../util/setting'
 import {DANG_NHAP} from '../actions/types/UserType'
 
-let usLogin = {};
-
-if (localStorage.getItem(USER_LOGIN)) {
-  usLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
-}
-
 const initialState = {
-  userLogin: usLogin,
+  userLogin: null,
 };
 
 export const UserReducer = (state = initialState, action) => {
@@ -18,7 +11,7 @@ export const UserReducer = (state = initialState, action) => {
         state.userLogin = action.payload
         return {...state}
     }
-      
+
     default: {
         return {...state}
     }

@@ -12,7 +12,7 @@ export default function Footer() {
       {/* column 1 */}
       <div className="footer-col1 pl-5">
         <div className="para-first-col1 mb-6">
-          <img src={logo} />
+          <img src={logo} alt="..."/>
           <p>
             Cybersoft Academy - Hệ thống đào tạo lập trình chuyên sau theo dự án
             thực tế
@@ -82,7 +82,7 @@ export default function Footer() {
               <span>I'm not a robot</span>
             </div>
             <div className="flex-1 ml-10 my-2">
-              <img src={recaptch} width="50" />
+              <img src={recaptch} width="50" alt="..."/>
               <p>Privacy-terms</p>
             </div>
           </div>
@@ -105,26 +105,26 @@ export default function Footer() {
       <div className="footer-col3 pr-5">
         <div className="footer-facebook p-3 font-bold">
           {/* footer-above */}
-          <a href="">
+          <a href="/">
             <div className="flex items-center mb-5">
-              <img src={logo} width="130" className="mr-2" />
-              <a>Cybersoft Academy</a>
+              <img src={logo} width="130" className="mr-2" alt="..."/>
+              <a href="/">Cybersoft Academy</a>
             </div>
             <div className="flex items-center justify-between mb-5">
-              <a type="button" href="" className="text-black bg-white py-1 px-3 btn-facebook">
+              <a type="button" href="/" className="text-black bg-white py-1 px-3 btn-facebook">
                 <i class="fab fa-facebook mr-1"></i>Liked
               </a>
-              <a type="button" href="" className="text-black bg-white py-1 px-3 btn-facebook">
+              <a type="button" href="/" className="text-black bg-white py-1 px-3 btn-facebook">
                 <i class="fab fa-facebook-messenger mr-1"></i>Send message
               </a>
             </div>
           </a>
           {/* footer-below */}
           <div className="footer-below mt-4">
-            <img src={footer1} />
-            <img src={footer2} />
-            <img src={footer3} />
-            <img src={footer1} />
+            <img src={footer1} alt="..."/>
+            <img src={footer2} alt="..."/>
+            <img src={footer3} alt="..."/>
+            <img src={footer1} alt="..."/>
           </div>
         </div>
         {/* footer-text */}

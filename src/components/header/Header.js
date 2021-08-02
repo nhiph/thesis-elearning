@@ -4,7 +4,6 @@ import "./Header.scss";
 import {useSelector, useDispatch} from 'react-redux'
 import {useEffect} from 'react'
 import { getListCategoryAction, getCourseCategoryAction } from "../../redux/actions/CourseAction";
-import SignUp from '../drawer/DrawerSignUp'
 import {NavLink} from 'react-router-dom'
 import DrawerSignUp from "../drawer/DrawerSignUp";
 import DrawerSignIn from "../drawer/DrawerSignIn";
@@ -80,9 +79,9 @@ export default function Header() {
               <li>
                 <a
                   className="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                  href="#"
+                  href="/"
                 >
-                  <img src={logo} width="200" />
+                  <img src={logo} width="200" alt="..."/>
                 </a>
               </li>
               {/* DMKH - PC */}
@@ -90,10 +89,10 @@ export default function Header() {
                 <li className="my-3">
                   <a
                     className="no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                    href="#"
+                    href="/"
                   >
                     <span id="DanhMucKhoaHoc" ref={ref} onClick={() => showCategory()}>
-                      <i class="fa fa-align-justify mr-2"></i>
+                      <i className="fa fa-align-justify mr-2"></i>
                       Danh mục khóa học
                     </span>
                     <div id="categoryList">
@@ -104,7 +103,7 @@ export default function Header() {
                 <li>
                   <a
                     className="no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                    href="#"
+                    href="/"
                   >
                     <input
                       type="text"
@@ -128,15 +127,15 @@ export default function Header() {
             {_.isEmpty(userLogin) ? <DrawerSignIn /> : 
             <NavLink 
               to="/mypage"
-              class="bg-gray-700 text-xl text-gray-100 px-8 rounded-lg py-2">
+              className="bg-gray-700 text-xl text-gray-100 px-8 rounded-lg py-2">
               {userLogin.taiKhoan}
             </NavLink>}
             
-            <div class="mr-3"></div>
+            <div className="mr-3"></div>
             {_.isEmpty(userLogin) ? <DrawerSignUp /> : 
             <button
               onClick={() => dangXuat()}
-              class="bg-gray-300 text-gray-900 text-md font-bold px-8 rounded-lg py-3">
+              className="bg-gray-300 text-gray-900 text-md font-bold px-8 rounded-lg py-3">
               Đăng xuất</button> }
 
             {/* <DrawerSignUp />  */}

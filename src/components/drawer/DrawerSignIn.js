@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { Drawer, Button, Select } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Drawer, Button } from "antd";
 import "./SignIn.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {signInAction} from '../../redux/actions/UserAction'
 import './SignIn.scss'
-
-
-const { Option } = Select;
 
 export default function DrawerSignIn(props) {
   const [visible, setVisible] = useState(false);

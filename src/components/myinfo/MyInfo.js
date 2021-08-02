@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { USER_LOGIN } from "../../util/setting";
+import React from "react";
+import { useSelector } from "react-redux";
+import UpdateInfo from "./UpdateInfo";
 
 export default function MyInfo() {
   const {userLogin} = useSelector(state => state.UserReducer)
-
-  // useEffect(() => {
-  //   // let getUser = localStorage.getItem(USER_LOGIN);
-  //   setUserLocal(getUser);
-  //   console.log("getUser", getUser)
-  //   console.log('userlocal', userLocal)
-  // }, []);
 
   return (
     <div class="grid grid-cols-3">
       <div className="flex justify-center">
         <div>
           <h1 className="text-gray-600 text-3xl text-center">Ảnh đại diện</h1>
-          <img src="https://picsum.photos/200/200" />
-          <a
+          <img src="https://picsum.photos/200/200" alt="..."/>
+          <a href="/"
             className="text-blue-600 text-lg text-center mt-5"
             style={{ textDecoration: "underline" }}
             type="button"
@@ -51,9 +44,7 @@ export default function MyInfo() {
           </div>
 
           <div className="flex justify-end">
-            <button className="bg-gray-800 text-gray-100 font-bold text-xl p-4 rounded-md">
-              Cập nhật thông tin
-            </button>
+          <UpdateInfo />
           </div>
         </div>
       </div>
