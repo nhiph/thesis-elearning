@@ -1,67 +1,80 @@
-import React, {useState, useRef} from "react";
+import React, { useState, useRef } from "react";
 import logo from "../../assets/img/MIN-OP1.png";
 import "./Header.scss";
-import {useSelector, useDispatch} from 'react-redux'
-import {useEffect} from 'react'
-import { getListCategoryAction, getCourseCategoryAction } from "../../redux/actions/CourseAction";
-import {NavLink} from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import {
+  getListCategoryAction,
+  getCourseCategoryAction,
+} from "../../redux/actions/CourseAction";
+import { NavLink } from "react-router-dom";
 import DrawerSignUp from "../drawer/DrawerSignUp";
 import DrawerSignIn from "../drawer/DrawerSignIn";
-import _ from 'lodash';
-import {USER_LOGIN, ACCESSTOKEN} from '../../util/setting'
+import _ from "lodash";
+import { USER_LOGIN, ACCESSTOKEN } from "../../util/setting";
 
 export default function Header() {
-  const ref = useRef()
-  const [isShow, setIsShow] = useState(false)
+  const ref = useRef();
+  const [isShow, setIsShow] = useState(false);
 
-  const {categoryList} = useSelector(state => state.CourseReducer)
-  const {userLogin} = useSelector(state => state.UserReducer)
+  const { categoryList } = useSelector((state) => state.CourseReducer);
+  const { userLogin } = useSelector((state) => state.UserReducer);
 
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    let action = getListCategoryAction()
-    dispatch(action)
-  }, [])
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const checkIfClickedOutside = e => {
+    let action = getListCategoryAction();
+    dispatch(action);
+  }, []);
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
       // If the menu is open and the clicked target is not within the menu,
       // then close the menu
       if (isShow && ref.current && !ref.current.contains(e.target)) {
-        setIsShow(false)
+        setIsShow(false);
       }
-    }
-    document.addEventListener("mousedown", checkIfClickedOutside)
+    };
+    document.addEventListener("mousedown", checkIfClickedOutside);
     return () => {
       // Cleanup the event listener
-      document.removeEventListener("mousedown", checkIfClickedOutside)
-    }
-  }, [isShow])
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [isShow]);
 
-  const getCourseCategory = (maDanhMuc, maNhom = 'GP01') => {
-    console.log(maDanhMuc, maNhom);
-    let action = getCourseCategoryAction(maDanhMuc, maNhom)
-    dispatch(action)
-    showCategory()
-  }
+  const getCourseCategory = (maDanhMuc, maNhom = "GP01") => {
+    let action = getCourseCategoryAction(maDanhMuc, maNhom);
+    dispatch(action);
+    showCategory();
+  };
 
   const renderCategoryList = () => {
     return categoryList.map((category, idx) => {
-      return <div key={idx} onClick={() => getCourseCategory(category.maDanhMuc, userLogin.maNhom)}>
-          {category.tenDanhMuc}
-      </div>
-    })
-  }
+      return (
+        <li
+          key={idx}
+        >
+          <NavLink to="/category" 
+              onClick={() => getCourseCategory(category.maDanhMuc, userLogin.maNhom)
+          }>{category.tenDanhMuc}</NavLink>
+        </li>
+      );
+    });
+  };
 
   const showCategory = () => {
-    setIsShow(!isShow)
-  }
+    setIsShow(!isShow);
+  };
 
   const dangXuat = async () => {
     await localStorage.removeItem(USER_LOGIN);
     await localStorage.removeItem(ACCESSTOKEN);
     window.location.reload();
+  };
+
+  const getListCourseFilterAction = (tenKhoaHoc='front end', MaNhom='GP01') => {
+    let action = getListCourseFilterAction(tenKhoaHoc, MaNhom)
+    dispatch(action)
   }
 
   return (
@@ -81,36 +94,38 @@ export default function Header() {
                   className="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
                   href="/"
                 >
-                  <img src={logo} width="200" alt="..."/>
+                  <img src={logo} width="200" alt="..." />
                 </a>
               </li>
               {/* DMKH - PC */}
               <div className="flex justify-center items-center flex-col lg:flex-row lg:items-center mr-4">
                 <li className="my-3">
-                  <a
-                    className="no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                    href="/"
-                  >
-                    <span id="DanhMucKhoaHoc" ref={ref} onClick={() => showCategory()}>
+                  <span className="no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2">
+                    <span
+                      id="DanhMucKhoaHoc"
+                      ref={ref}
+                      onClick={() => showCategory()}
+                    >
                       <i className="fa fa-align-justify mr-2"></i>
                       Danh mục khóa học
                     </span>
                     <div id="categoryList">
-                      {isShow ? <div ref={ref}>{renderCategoryList()}</div> : ''} 
+                      {isShow ? <ul ref={ref}>{renderCategoryList()}</ul> : ""}
                     </div>
-                  </a>
+                  </span>
                 </li>
                 <li>
-                  <a
+                  <div
                     className="no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                    href="/"
                   >
                     <input
                       type="text"
                       placeholder="Tìm kiếm khóa học"
                       id="TiemKiemKhoaHoc"
+                      // onBlur={() => getListCourseFilterAction()}
+                      // onKeyPress={() => getListCourseFilterAction()}
                     />
-                  </a>
+                  </div>
                 </li>
               </div>
             </ul>
@@ -124,19 +139,28 @@ export default function Header() {
             className="auth flex flex-col lg:flex-row items-center"
             id="wrapper-sign"
           >
-            {_.isEmpty(userLogin) ? <DrawerSignIn /> : 
-            <NavLink 
-              to="/mypage"
-              className="bg-gray-700 text-xl text-gray-100 px-8 rounded-lg py-2">
-              {userLogin.taiKhoan}
-            </NavLink>}
-            
+            {_.isEmpty(userLogin) ? (
+              <DrawerSignIn />
+            ) : (
+              <NavLink
+                to="/mypage"
+                className="bg-gray-700 text-xl text-gray-100 px-8 rounded-lg py-2"
+              >
+                {userLogin.taiKhoan}
+              </NavLink>
+            )}
+
             <div className="mr-3"></div>
-            {_.isEmpty(userLogin) ? <DrawerSignUp /> : 
-            <button
-              onClick={() => dangXuat()}
-              className="bg-gray-300 text-gray-900 text-md font-bold px-8 rounded-lg py-3">
-              Đăng xuất</button> }
+            {_.isEmpty(userLogin) ? (
+              <DrawerSignUp />
+            ) : (
+              <button
+                onClick={() => dangXuat()}
+                className="bg-gray-300 text-gray-900 text-md font-bold px-8 rounded-lg py-3"
+              >
+                Đăng xuất
+              </button>
+            )}
 
             {/* <DrawerSignUp />  */}
           </div>

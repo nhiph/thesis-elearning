@@ -13,6 +13,8 @@ import axios from "axios";
 import { DANG_NHAP } from "./redux/actions/types/UserType";
 import {useDispatch} from 'react-redux'
 import { REGISTER_COURSE } from "./redux/actions/types/CoursesType";
+import CourseCategory from "./pages/course-category/CourseCategory";
+import CourseFind from "./pages/course-find/CourseFind";
 
 export const history = createBrowserHistory();
 
@@ -48,11 +50,13 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Switch>
+      <Switch>CourseFind
         <AdminTemplate exact component={AdminUser} path="/admin" />
         <HomeTemplate exact component={Home} path="/" />
         <HomeTemplate exact component={CourseDetail} path="/detail/:courseID" />
         <HomeTemplate exact component={TabMypage} path="/mypage" />
+        <HomeTemplate exact component={CourseCategory} path="/category" />
+        <HomeTemplate exact component={CourseFind} path="/filter" />
       </Switch>
     </BrowserRouter>
   );

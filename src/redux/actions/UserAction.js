@@ -12,7 +12,6 @@ export const signUpAction = (info) => {
                 method: 'POST',
                 data: info
             })
-            console.log("result",result)
             if(result.status === 200) {
                 alert('Đăng ký thành công')
             }
@@ -71,13 +70,40 @@ export const updateInfoAction = (updateInfo) => {
                     Authorization: `Bearer ${localStorage.getItem(ACCESSTOKEN)}`,
                 },
             })
-            console.log(result)
-            // dispatch({
-            //     type: '',
-            //     payload: 
-            // })
+            let result2 = await axios({
+                url: 'https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinNguoiDung',
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(ACCESSTOKEN)}`,
+                },
+            })
+            dispatch({
+                type: DANG_NHAP,
+                payload: result2.data,
+            })
         }catch(err) {
             console.log('err', err)
+        }
+    }
+}
+
+export const getUserInfo = (accessToken) => {
+    return async (dispatch) => {
+        try {
+            let result = await axios({
+                url: 'https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinNguoiDung',
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(ACCESSTOKEN)}`,
+                },
+            })
+            dispatch({
+                type: REGISTER_COURSE,
+                payload: result.data 
+            })
+        }
+        catch(err) {
+            console.log("err", err)
         }
     }
 }

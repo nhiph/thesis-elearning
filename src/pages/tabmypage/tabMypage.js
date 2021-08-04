@@ -12,13 +12,14 @@ export default function TabMypage(props) {
 
   const { userLogin } = useSelector((state) => state.UserReducer);
 
-  if(!userLogin) {
-    alert('Vui lòng đăng nhập !')
-    return <Redirect to="/"/>
-  }
+  setTimeout(() => {
+    if(!userLogin) {
+      // alert('Vui lòng đăng nhập !')
+      return <Redirect to="/" />
+    }
+  }, 4000);
 
   const callback = (key) => {
-    console.log(key);
   };
 
   return (

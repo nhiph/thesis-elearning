@@ -3,14 +3,14 @@ import { Modal, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { updateInfoAction } from "../../redux/actions/UserAction";
 
 export default function UpdateInfo() {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
   };
   const { userLogin } = useSelector((state) => state.UserReducer);
-  console.log("userLogin", userLogin)
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -31,9 +31,8 @@ export default function UpdateInfo() {
       hoTen: Yup.string().required("Họ tên không được bỏ trống"),
     }),
     onSubmit: (values) => {
-      console.log(values);
-      // let action = signUpAction(values);
-      // dispatch(action);
+      let action = updateInfoAction(values);
+      dispatch(action);
       setIsModalVisible(false);
     },
   });
@@ -54,7 +53,7 @@ export default function UpdateInfo() {
           <div className="grid grid-cols-2 gap-4">
             <div className="form-group">
               <p>Tài khoản</p>
-              <input value={userLogin.taiKhoan} name="taiKhoan" className="form-control"
+              <input disabled value={userLogin.taiKhoan} name="taiKhoan" className="form-control"
               onChange={handleChange}
               onBlur={formik.handleBlur}
               />
@@ -63,7 +62,7 @@ export default function UpdateInfo() {
             <div className="form-group">
               <p>Họ tên</p>
               <input 
-                value={userLogin.hoTen} 
+                value={formik.values.hoTen} 
                 name="hoTen" className="form-control" 
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -76,7 +75,7 @@ export default function UpdateInfo() {
               <p>Mật khẩu</p>
               <input 
                 type="password"
-                value={userLogin.matKhau} name="matKhau" className="form-control" 
+                value={formik.values.matKhau} name="matKhau" className="form-control" 
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
               />
@@ -87,6 +86,7 @@ export default function UpdateInfo() {
             <div className="form-group">
               <p>Email</p>
               <input 
+                disabled
                 value={userLogin.email} name="email" className="form-control" 
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -100,7 +100,7 @@ export default function UpdateInfo() {
             <div className="form-group">
               <p>Số điện thoại</p>
               <input 
-                value={userLogin.soDT} 
+                value={formik.values.soDT} 
                 name="soDT" className="form-control" 
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -112,6 +112,7 @@ export default function UpdateInfo() {
             <div className="form-group">
               <p>Mã nhóm</p>
               <select 
+                disabled
                 value={userLogin.maNhom} name="maNhom" className="form-control"
                 onChange={handleChange}
               >
@@ -126,7 +127,7 @@ export default function UpdateInfo() {
             <div className="form-group">
               <p>Mã loại người dùng</p>
               <select 
-                value={userLogin.maLoaiNguoiDung} name="maLoaiNguoiDung" className="form-control"
+                value={formik.values.maLoaiNguoiDung} name="maLoaiNguoiDung" className="form-control"
                 onChange={handleChange}
                 >
                 <option value="HV">HV</option>

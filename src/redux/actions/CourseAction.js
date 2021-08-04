@@ -3,6 +3,10 @@ import {
   GET_COURSE_LIST,
   GET_COURSE_DETAIL,
   GET_CATEGORY_LIST,
+  REGISTER_COURSE,
+  REMOVE_COURSE,
+  GET_COURSE_CATEGORY_LIST,
+  GET_COURSE_FILTER,
 } from "../actions/types/CoursesType";
 import { ACCESSTOKEN } from "../../util/setting";
 
@@ -66,8 +70,9 @@ export const getCourseCategoryAction = (maDanhMuc, maNhom) => {
         url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${maDanhMuc}&MaNhom=${maNhom}`,
         method: "GET",
       });
+      console.log("getCourseCategoryAction",result.data)
       dispatch({
-        type: GET_COURSE_LIST,
+        type: GET_COURSE_CATEGORY_LIST,
         payload: result.data,
       });
     } catch (err) {
@@ -79,7 +84,7 @@ export const getCourseCategoryAction = (maDanhMuc, maNhom) => {
 export const registerCourseAction = (infoDangKy) => {
   return async (dispatch) => {
     try {
-      let result1 = await axios({
+      await axios({
         url:
           "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/DangKyKhoaHoc",
         method: "POST",
@@ -88,11 +93,17 @@ export const registerCourseAction = (infoDangKy) => {
           Authorization: `Bearer ${localStorage.getItem(ACCESSTOKEN)}`,
         },
       });
-      
-      // dispatch({
-      //   type: REGISTER_COURSE,
-      //   payload: result2.data,
-      // });
+      let result2 = await axios({
+        url: 'https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinNguoiDung',
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem(ACCESSTOKEN)}`,
+        },
+      })
+      dispatch({
+        type: REGISTER_COURSE,
+        payload: result2.data,
+      });
     } catch (err) {
       console.log("err", err);
     }
@@ -108,13 +119,30 @@ export const removeCourseAction = (infoRemove) => {
         data: infoRemove,
         headers: {
           Authorization: `Bearer ${localStorage.getItem(ACCESSTOKEN)}`,
-      }       
+        }       
       })
-      console.log(result)
-      // dispatch({
-      //   type: '',
-      //   payload: ''
-      // })
+      dispatch({
+        type: REMOVE_COURSE,
+        payload: infoRemove.maKhoaHoc
+      })
+    }catch(err) {
+      console.log("err", err)
+    }
+  }
+}
+
+export const getListCourseFilterAction = (tenKhoaHoc, MaNhom) => {
+  return async (dispatch) => {
+    try{
+      let result = await axios({
+        url:
+          `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${tenKhoaHoc}&MaNhom=${MaNhom}`,
+        method: "GET",
+      });
+      dispatch({
+        type: GET_COURSE_FILTER,
+        payload: result.data
+      })
     }catch(err) {
       console.log("err", err)
     }
