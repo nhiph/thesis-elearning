@@ -1,4 +1,7 @@
 .home-banner {
+  background: url(../../assets/img/banner3.jpg) no-repeat center center;
+  background-size: cover;
+  width: 100%;
   button:first-child {
     padding: 7px;
     width: 150px;
@@ -11,8 +14,8 @@
     width: 150px;
     outline: none;
   }
-  #imdUnder {
-    background: url(../../assets/img/animation2.gif) no-repeat center center;
-    background-size: cover;
-  }
+  // #imdUnder {
+  //   background: url(../../assets/img/animation2.gif) no-repeat center center;
+  //   background-size: cover;
+  // }
 }

@@ -2,12 +2,7 @@ import React from "react";
 
 export default function Banner() {
   return (
-    <div className="home-banner grid grid-cols-7 gap-4 bg-gray-700 py-32">
-      <div className="col-span-1"></div>
-      <div className="col-span-2" id="imdUnder">
-        {/* <img src={frame2} /> */}
-      </div>
-      <div className="col-span-1"></div>
+    <div className="home-banner flex justify-center gap-4 bg-gray-700 pt-20 pb-40 px-20">
       <div className="col-span-2 pr-5">
         <h1 className="text-yellow-500 text-5xl font-bold">
           Khởi đầu sự nghiệp của bạn
@@ -20,7 +15,7 @@ export default function Banner() {
           <button className="bg-gray-700 font-bold">Tư vấn học</button>
         </div>
       </div>
-      <div className="col-span-1"></div>
+      {/* <div className="col-span-1"></div> */}
     </div>
   );
 }

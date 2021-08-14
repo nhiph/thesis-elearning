@@ -6,12 +6,26 @@ import { useEffect } from "react";
 import {
   getListCategoryAction,
   getCourseCategoryAction,
+  getListCourseFilterAction,
 } from "../../redux/actions/CourseAction";
 import { NavLink } from "react-router-dom";
 import DrawerSignUp from "../drawer/DrawerSignUp";
 import DrawerSignIn from "../drawer/DrawerSignIn";
 import _ from "lodash";
 import { USER_LOGIN, ACCESSTOKEN } from "../../util/setting";
+import { Input } from 'antd';
+import { AudioOutlined } from '@ant-design/icons';
+
+const { Search } = Input;
+
+const suffix = (
+  <AudioOutlined
+    style={{
+      fontSize: 16,
+      color: '#1890ff',
+    }}
+  />
+);
 
 export default function Header() {
   const ref = useRef();
@@ -21,6 +35,12 @@ export default function Header() {
   const { userLogin } = useSelector((state) => state.UserReducer);
 
   const dispatch = useDispatch();
+
+  const onSearch = (value) => {
+    console.log(value)
+    let action = getListCourseFilterAction(value, userLogin.maNhom)
+    dispatch(action)
+  };
 
   useEffect(() => {
     let action = getListCategoryAction();
@@ -72,11 +92,6 @@ export default function Header() {
     window.location.reload();
   };
 
-  const getListCourseFilterAction = (tenKhoaHoc='front end', MaNhom='GP01') => {
-    let action = getListCourseFilterAction(tenKhoaHoc, MaNhom)
-    dispatch(action)
-  }
-
   return (
     <nav
       id="header"
@@ -118,13 +133,7 @@ export default function Header() {
                   <div
                     className="no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
                   >
-                    <input
-                      type="text"
-                      placeholder="Tìm kiếm khóa học"
-                      id="TiemKiemKhoaHoc"
-                      // onBlur={() => getListCourseFilterAction()}
-                      // onKeyPress={() => getListCourseFilterAction()}
-                    />
+                    <Search placeholder="Tìm kiếm khóa học" onSearch={onSearch} enterButton />
                   </div>
                 </li>
               </div>

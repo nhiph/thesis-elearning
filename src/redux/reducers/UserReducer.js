@@ -1,5 +1,5 @@
 import { REGISTER_COURSE, REMOVE_COURSE } from '../actions/types/CoursesType';
-import {DANG_NHAP} from '../actions/types/UserType'
+import {DANG_NHAP, GET_LIST_USER} from '../actions/types/UserType'
 
 const initialState = {
   userLogin: null,

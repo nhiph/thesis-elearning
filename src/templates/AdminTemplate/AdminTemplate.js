@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import {HomeOutlined, UserAddOutlined, FileOutlined, TeamOutlined, UserOutlined} from "@ant-design/icons";
 import { Layout, Menu, Tabs } from "antd";
 import { Route } from "react-router-dom";
+import AdminCourse from "../../pages/administration-course/AdminCourse";
+import AdminUser from "../../pages/administration-user/AdminUser";
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -54,10 +56,10 @@ export default function AdminTemplate(props) {
               <Content style={{ margin: "0 16px" }}>
                 <Tabs defaultActiveKey="1">
                   <TabPane tab="Quản lý khóa học" key="1">
-                    Content of Tab Pane 1
+                    <AdminCourse />
                   </TabPane>
                   <TabPane tab="Quản lý người dùng" key="2">
-                    Content of Tab Pane 2
+                    <AdminUser />
                   </TabPane>
                 </Tabs>
               </Content>

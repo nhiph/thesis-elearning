@@ -15,6 +15,7 @@ import {useDispatch} from 'react-redux'
 import { REGISTER_COURSE } from "./redux/actions/types/CoursesType";
 import CourseCategory from "./pages/course-category/CourseCategory";
 import CourseFind from "./pages/course-find/CourseFind";
+import Tabpane from "./components/Tabpane";
 
 export const history = createBrowserHistory();
 
@@ -57,6 +58,7 @@ export default function App() {
         <HomeTemplate exact component={TabMypage} path="/mypage" />
         <HomeTemplate exact component={CourseCategory} path="/category" />
         <HomeTemplate exact component={CourseFind} path="/filter" />
+        {/* <HomeTemplate exact component={Tabpane} path="/tab" /> */}
       </Switch>
     </BrowserRouter>
   );

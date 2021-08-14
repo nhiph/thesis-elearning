@@ -10,12 +10,12 @@ import {
 } from "../actions/types/CoursesType";
 import { ACCESSTOKEN } from "../../util/setting";
 
-export const getListCourseAction = () => {
+export const getListCourseAction = (MaNhom='GP01') => {
   return async (dispatch) => {
     try {
       let result = await axios({
         url:
-          "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01",
+          `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${MaNhom}`,
         method: "GET",
       });
       dispatch({
@@ -139,6 +139,7 @@ export const getListCourseFilterAction = (tenKhoaHoc, MaNhom) => {
           `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${tenKhoaHoc}&MaNhom=${MaNhom}`,
         method: "GET",
       });
+      console.log("CourseFilter", result)
       dispatch({
         type: GET_COURSE_FILTER,
         payload: result.data

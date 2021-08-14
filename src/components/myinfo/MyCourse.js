@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import { Table, Space} from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { registerCourseAction } from "../../redux/actions/CourseAction";
 import './MyCourse.scss'
 import {removeCourseAction} from '../../redux/actions/CourseAction'
 import { ACCESSTOKEN } from "../../util/setting";

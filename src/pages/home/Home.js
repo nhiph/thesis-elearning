@@ -12,9 +12,10 @@ export default function Home() {
   const {userLogin} = useSelector(state => state.UserReducer)
   const [current, setCurrent] = useState(1)
   const dispatch = useDispatch()
-
+  console.log(courseList)
+  // console.log("maNhom", userLogin)
   useEffect(() => {
-    let action = getListCourseAction();
+    let action = getListCourseAction(userLogin?.maNhom);
     dispatch(action)
   }, [])
 
