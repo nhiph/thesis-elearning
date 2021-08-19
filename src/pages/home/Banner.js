@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Banner() {
   return (
-    <div className="home-banner flex justify-center gap-4 bg-gray-700 pt-20 pb-40 px-20">
+    <div className="home-banner flex justify-center gap-4 bg-gray-100 pt-20 pb-40 px-20">
       <div className="col-span-2 pr-5">
         <h1 className="text-yellow-500 text-5xl font-bold">
           Khởi đầu sự nghiệp của bạn

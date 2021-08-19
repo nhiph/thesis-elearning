@@ -21,11 +21,11 @@ export default function DrawerSignUp(props) {
       email: "",
     },
     validationSchema: Yup.object().shape({
-      taiKhoan: Yup.string().required("Tài khoản không được bỏ trống"),
-      matKhau: Yup.string().required("Mật khẩu không được bỏ trống").min(6, "Mật khẩu tối thiểu 6 - 22 kí tự!").max(22, "Mật khẩu tối thiểu 6 - 22 kí tự!"),
-      email: Yup.string().email("Email không hợp lệ").required("Email không được bỏ trống"),
-      soDT: Yup.string().required("Số điện thoại không được bỏ trống").matches(/^[0-9]+$/, "Số điện thoại phải là số"),
-      hoTen: Yup.string().required("Họ tên không được bỏ trống"),
+      taiKhoan: Yup.string().required("Tài khoản không được bỏ trống *"),
+      matKhau: Yup.string().required("Mật khẩu không được bỏ trống *").min(6, "Mật khẩu tối thiểu 6 - 22 kí tự! *").max(22, "Mật khẩu tối thiểu 6 - 22 kí tự! *"),
+      email: Yup.string().email("Email không hợp lệ *").required("Email không được bỏ trống *"),
+      soDT: Yup.string().required("Số điện thoại không được bỏ trống *").matches(/^[0-9]+$/, "Số điện thoại phải là số *"),
+      hoTen: Yup.string().required("Họ tên không được bỏ trống *"),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -61,7 +61,7 @@ export default function DrawerSignUp(props) {
       >
         <form className="container" onSubmit={handleSubmit}>
           <div className="form-group">
-            <p>Tài khoản</p>
+            <p className="label">Tài khoản</p>
             <input
               name="taiKhoan"
               className="form-control"
@@ -69,7 +69,7 @@ export default function DrawerSignUp(props) {
               onBlur={formik.handleBlur}
             />
             {touched.taiKhoan && errors.taiKhoan && (
-              <p className="text-red-400">{formik.errors.taiKhoan}</p>
+              <p className="text-yellow-300 mt-2">{formik.errors.taiKhoan}</p>
             )}
           </div>
           <div className="form-group">
@@ -82,7 +82,7 @@ export default function DrawerSignUp(props) {
               onBlur={formik.handleBlur}
             />
             {touched.hoTen && errors.hoTen && (
-              <p className="text-red-400">{formik.errors.hoTen}</p>
+              <p className="text-yellow-300 mt-2">{formik.errors.hoTen}</p>
             )}
           </div>
           <div className="form-group">
@@ -96,7 +96,7 @@ export default function DrawerSignUp(props) {
             />
           </div>
           {touched.matKhau && errors.matKhau && (
-              <p className="text-red-400">{formik.errors.matKhau}</p>
+              <p className="text-yellow-300 mt-2">{formik.errors.matKhau}</p>
             )}
           <div className="form-group">
             <p>Email</p>
@@ -107,7 +107,7 @@ export default function DrawerSignUp(props) {
               onBlur={formik.handleBlur}
             />
             {touched.email && errors.email && (
-              <p className="text-red-400">{formik.errors.email}</p>
+              <p className="text-yellow-300 mt-2">{formik.errors.email}</p>
             )}
           </div>
           <div className="form-group">
@@ -119,14 +119,14 @@ export default function DrawerSignUp(props) {
               onBlur={formik.handleBlur}
             />
             {touched.soDT && errors.soDT && (
-              <p className="text-red-400">{formik.errors.soDT}</p>
+              <p className="text-yellow-300 mt-2">{formik.errors.soDT}</p>
             )}
           </div>
           <div className="form-group">
             <p>Mã nhóm</p>
             <select
               name="maNhom"
-              className="form-control"
+              className="form-control select"
               onChange={handleChange}
             >
               <option value="GP01">GP01</option>
@@ -138,9 +138,9 @@ export default function DrawerSignUp(props) {
           <div className="form-group mb-10 flex justify-center">
             <button
               type="submit"
-              className="btn-signup rounded-md mt-10 text-center bg-yellow-400 px-6 py-4 text-xl text-gray-700 font-bold"
+              className="btn-signup rounded-sm mt-10 text-center bg-green-500 w-full py-4 text-xl text-gray-50 font-bold"
             >
-              Đăng ký
+              ĐĂNG KÝ
             </button>
           </div>
         </form>

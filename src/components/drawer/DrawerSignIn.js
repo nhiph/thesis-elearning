@@ -79,9 +79,9 @@ export default function DrawerSignIn(props) {
           <div className="form-group mb-10 flex justify-center">
             <button
               type="submit"
-              className="btn-signin rounded-md mt-10 text-center bg-yellow-400 px-6 py-4 text-xl text-gray-700 font-bold"
+              className="btn-signin rounded-sm mt-10 text-center bg-green-500 w-full py-4 text-xl text-gray-50 font-bold"
             >
-              Đăng nhập
+              ĐĂNG NHẬP
             </button>
           </div>
         </form>
