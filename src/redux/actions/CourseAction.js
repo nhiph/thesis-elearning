@@ -139,7 +139,6 @@ export const getListCourseFilterAction = (tenKhoaHoc, MaNhom) => {
           `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${tenKhoaHoc}&MaNhom=${MaNhom}`,
         method: "GET",
       });
-      console.log("CourseFilter", result)
       dispatch({
         type: GET_COURSE_FILTER,
         payload: result.data

@@ -3,19 +3,20 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getListCourseFilterAction, registerCourseAction } from "../../redux/actions/CourseAction";
 
-export default function CourseFind() {
+export default function CourseFind(props) {
   const { userLogin } = useSelector((state) => state.UserReducer);
   const { courseFilterList } = useSelector((state) => state.CourseReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getListCourseAction()
+    let keyword = props.match.params.keyword
+    let maNhom = 'GP01';
+    if(userLogin?.maNhom) {
+      maNhom = userLogin?.maNhom
+    }
+    let action = getListCourseFilterAction(keyword, maNhom);
+    dispatch(action);
   }, [])
-
-  const getListCourseAction = (tenKhoaHoc='front end', MaNhom='GP01') => {
-    let action = getListCourseFilterAction(tenKhoaHoc, MaNhom)
-    dispatch(action)
-  }
 
   const dangKyKhoaHoc = (maKhoaHoc, taiKhoan) => {
     let infoDangKy = {
@@ -70,7 +71,7 @@ export default function CourseFind() {
   };
 
   return (
-    <div className="container px-5 py-4 mx-auto text-center">
+    <div className="container py-10 mx-auto text-center">
       <h1 className="text-3xl">Tìm thấy n khóa học</h1>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">{renderCourseList()}</div>

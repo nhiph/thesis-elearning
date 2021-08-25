@@ -6,7 +6,7 @@
     background: #38b2ac !important;
     color: white !important;
     text-transform: uppercase !important;
-    font-size: 20px !important;
+    font-size: 18px !important;
     font-weight: 800 !important;
     min-height: 100px !important;
 }
@@ -20,4 +20,10 @@
 }
 .ant-menu-title-content:active {
     color: white !important;
+}
+.ant-menu-light .ant-menu-submenu-title:hover {
+    color: white !important;
+}
+.ant-menu-item:hover,.ant-menu-item-only-child:hover,.ant-menu-overflow-item:hover {
+    border-bottom: none!important;
 }

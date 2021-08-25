@@ -36,7 +36,6 @@ export const CourseReducer = (state = initialState, action) => {
     }
 
     case GET_COURSE_FILTER: {
-        console.log(action.payload)
         state.courseFilterList = action.payload
         return {...state}
     }

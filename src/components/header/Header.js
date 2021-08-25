@@ -8,13 +8,14 @@ import {
   getCourseCategoryAction,
   getListCourseFilterAction,
 } from "../../redux/actions/CourseAction";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import DrawerSignUp from "../drawer/DrawerSignUp";
 import DrawerSignIn from "../drawer/DrawerSignIn";
 import _ from "lodash";
 import { USER_LOGIN, ACCESSTOKEN } from "../../util/setting";
-import { Input } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
+import { Input } from "antd";
+import { AudioOutlined } from "@ant-design/icons";
+import DropdownMenu from "../dropdown/DropdownMenu";
 
 const { Search } = Input;
 
@@ -22,7 +23,7 @@ const suffix = (
   <AudioOutlined
     style={{
       fontSize: 16,
-      color: '#1890ff',
+      color: "#1890ff",
     }}
   />
 );
@@ -37,9 +38,13 @@ export default function Header() {
   const dispatch = useDispatch();
 
   const onSearch = (value) => {
-    console.log(value)
-    let action = getListCourseFilterAction(value, userLogin.maNhom)
-    dispatch(action)
+    // let maNhom = 'GP01';
+    // if(userLogin.maNhom) {
+    //   maNhom = userLogin.maNhom
+    // }
+    // let action = getListCourseFilterAction(value, maNhom);
+    // dispatch(action);
+    return <Redirect to={`/filter/:${value}`} />
   };
 
   useEffect(() => {
@@ -68,20 +73,6 @@ export default function Header() {
     showCategory();
   };
 
-  const renderCategoryList = () => {
-    return categoryList.map((category, idx) => {
-      return (
-        <li
-          key={idx}
-        >
-          <NavLink to="/category" 
-              onClick={() => getCourseCategory(category.maDanhMuc, userLogin.maNhom)
-          }>{category.tenDanhMuc}</NavLink>
-        </li>
-      );
-    });
-  };
-
   const showCategory = () => {
     setIsShow(!isShow);
   };
@@ -93,88 +84,63 @@ export default function Header() {
   };
 
   return (
-    <nav
-      id="header"
-      className="z-30 bg-dark shadow-lg border-b border-blue-300 font-bold"
-    >
-      <div className="w-full flex items-center justify-between mt-0 px-6 py-2">
-        <div
-          className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1"
-          id="menu"
-        >
-          <nav>
-            <ul className="md:flex items-center justify-between text-base text-blue-600 pt-4 md:pt-0">
-              <li>
-                <a
-                  className="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                  href="/"
-                >
-                  <img src={logo} width="200" alt="..." />
-                </a>
-              </li>
-              {/* DMKH - PC */}
-              <div className="flex justify-center items-center flex-col lg:flex-row lg:items-center mr-4">
-                <li className="my-3">
-                  <span className="no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2">
-                    <span
-                      id="DanhMucKhoaHoc"
-                      ref={ref}
-                      onClick={() => showCategory()}
-                    >
-                      <i className="fa fa-align-justify mr-2"></i>
-                      Danh mục khóa học
-                    </span>
-                    <div id="categoryList">
-                      {isShow ? <ul ref={ref}>{renderCategoryList()}</ul> : ""}
-                    </div>
-                  </span>
-                </li>
-                <li>
-                  <div
-                    className="no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                  >
-                    <Search placeholder="Tìm kiếm khóa học" onSearch={onSearch} enterButton />
-                  </div>
-                </li>
-              </div>
-            </ul>
-          </nav>
-        </div>
-        <div
-          className="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4"
-          id="nav-content"
-        >
-          <div
-            className="auth flex flex-col lg:flex-row items-center"
-            id="wrapper-sign"
+    <div style={{background: '#FBC03C'}} className="w-full flex items-center justify-between mt-0 px-6 py-2">
+      <div
+        className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1"
+        id="menu"
+      >
+        <div className="mr-6">
+          <a
+            className="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
+            href="/"
           >
-            {_.isEmpty(userLogin) ? (
-              <DrawerSignIn />
-            ) : (
-              <NavLink
-                to="/mypage"
-                className="bg-gray-700 text-xl text-gray-100 px-8 rounded-lg py-2"
-              >
-                {userLogin.taiKhoan}
-              </NavLink>
-            )}
+            <img src={logo} width="300" alt="..." />
+          </a>
+        </div>
 
-            <div className="mr-3"></div>
-            {_.isEmpty(userLogin) ? (
-              <DrawerSignUp />
-            ) : (
-              <button
-                onClick={() => dangXuat()}
-                className="bg-gray-300 text-gray-900 text-md font-bold px-8 rounded-lg py-3"
-              >
-                Đăng xuất
-              </button>
-            )}
+        {/* DMKH - PC */}
+        <DropdownMenu />
+        <Search
+          placeholder="Tìm kiếm khóa học"
+          onSearch={onSearch}
+          enterButton
+          className="ml-8"
+        />
+      </div>
+      <div
+        className="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4"
+        id="nav-content"
+      >
+        <div
+          className="auth flex flex-col lg:flex-row items-center"
+          id="wrapper-sign"
+        >
+          {_.isEmpty(userLogin) ? (
+            <DrawerSignIn />
+          ) : (
+            <NavLink
+              to="/mypage"
+              className="bg-gray-700 text-xl text-gray-100 px-8 rounded-lg py-2"
+            >
+              {userLogin.taiKhoan}
+            </NavLink>
+          )}
 
-            {/* <DrawerSignUp />  */}
-          </div>
+          <div className="mr-3"></div>
+          {_.isEmpty(userLogin) ? (
+            <DrawerSignUp />
+          ) : (
+            <button
+              onClick={() => dangXuat()}
+              className="bg-gray-300 text-gray-900 text-md font-bold px-8 rounded-lg py-3"
+            >
+              Đăng xuất
+            </button>
+          )}
+
+          {/* <DrawerSignUp />  */}
         </div>
       </div>
-    </nav>
+    </div>
   );
 }

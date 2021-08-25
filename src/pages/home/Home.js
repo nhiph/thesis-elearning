@@ -1,125 +1,111 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Home.scss";
-import Banner from "./Banner";
-import {useEffect} from 'react'
-import { getListCourseAction, registerCourseAction } from "../../redux/actions/CourseAction";
-import {useSelector, useDispatch} from 'react-redux'
+import { useEffect } from "react";
+import {
+  getListCourseAction,
+  registerCourseAction,
+} from "../../redux/actions/CourseAction";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Pagination } from 'antd';
+import { Pagination } from "antd";
+import Banner2 from "../../components/banner/Banner2";
 
 export default function Home() {
-  const {courseList} = useSelector(state => state.CourseReducer)
-  const {userLogin} = useSelector(state => state.UserReducer)
-  const [current, setCurrent] = useState(1)
-  const dispatch = useDispatch()
-  console.log(courseList)
-  // console.log("maNhom", userLogin)
+  const { courseList } = useSelector((state) => state.CourseReducer);
+  const { userLogin } = useSelector((state) => state.UserReducer);
+  const [current, setCurrent] = useState(1);
+  const dispatch = useDispatch();
   useEffect(() => {
     let action = getListCourseAction(userLogin?.maNhom);
-    dispatch(action)
-  }, [])
+    dispatch(action);
+  }, []);
 
   const dangKyKhoaHoc = (maKhoaHoc, taiKhoan) => {
     let infoDangKy = {
       maKhoaHoc,
-      taiKhoan
-    }
-    let action = registerCourseAction(infoDangKy)
-    dispatch(action) 
-  }
+      taiKhoan,
+    };
+    let action = registerCourseAction(infoDangKy);
+    dispatch(action);
+  };
 
   const renderCourseList = () => {
     return courseList?.map((course, idx) => {
-      return <div className="p-4 md:w-1/3" key={idx}>
-      <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-        <img
-          className="lg:h-48 md:h-36 w-full object-cover object-center"
-          src={course.hinhAnh}
-          alt="blog"
-        />
-        <div className="p-6">
-          <h2 className="tracking-widest text-lg title-font font-medium text-gray-700 mb-1">
-            {course.maKhoaHoc}
-          </h2>
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-            {course.tenKhoaHoc.length > 30 ? course.tenKhoaHoc.substring(0,20) + '...' : course.tenKhoaHoc}
-          </h1>
-          <p className="leading-relaxed mb-3">
-          {course.biDanh.length > 30 ? course.biDanh.substring(0,20) + '...' : course.biDanh}
-          </p>
-          <div className="flex items-center flex-wrap ">
-            <NavLink 
-              to={`/detail/${course.maKhoaHoc}`}
-              className="bg-gray-700 px-6 py-4 text-xl text-white font-bold">
-              Xem chi tiết
-            </NavLink>
-            <NavLink 
-              to={`/detail/${course.maKhoaHoc}`}
-              onClick={() => dangKyKhoaHoc(course.maKhoaHoc, userLogin.taiKhoan)}
-              className="ml-2 bg-yellow-400 px-6 py-4 text-xl text-gray-700 font-bold">
-              Đăng ký
-            </NavLink>
-            <span className="mt-4 text-gray-800 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-              <svg
-                className="w-4 h-4 mr-1"
-                stroke="currentColor"
-                strokeWidth={2}
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
+      return (
+        <div className="bg-white shadow-2xl rounded-xl overflow-hidden max-w-xs order-first lg:order-none mb-4">
+          <div>
+            <img
+              src={course.hinhAnh}
+              alt="Abstract Design"
+              className="w-full h-40 sm:h-48 object-cover"
+            />
+          </div>
+
+          <div className="py-5 px-6 sm:px-8">
+            <h2 className="text-xl sm:text-2xl text-gray-800 font-semibold">
+              {course.tenKhoaHoc.length > 30
+                ? course.tenKhoaHoc.substring(0, 20) + "..."
+                : course.tenKhoaHoc}
+            </h2>
+            <div className="flex justify-end items-center text-gray-500 mb-2">
+                <span className="mr-2">
+                  {course.luotXem}K<i class="pl-2 fa fa-eye"></i>
+                </span>
+                <span>
+                  6<i class="pl-2 fa fa-comment-dots"></i>
+                </span>
+            </div>
+            <p className="text-gray-500 leading-relaxed">
+              {course.moTa.length > 100
+                ? course.moTa.substring(0, 100) + "..."
+                : "Lorem ipsum dolor sit amet, conse adipiscing elit. Phasellus enim erat, vestibulum vel."}
+            </p>
+            <div className="flex justify-between items-center">
+              <div className="flex justify-start items-center text-yellow-500">
+                <span className="mr-1">
+                  <i class="fa fa-star"></i>
+                </span>
+                <span className="mr-1">
+                  <i class="fa fa-star"></i>
+                </span>
+                <span className="mr-1">
+                  <i class="fa fa-star"></i>
+                </span>
+                <span className="mr-1">
+                  <i class="fa fa-star"></i>
+                </span>
+                <span className="mr-1">
+                  <i class="fa fa-star"></i>
+                </span>
+              </div>
+              <NavLink
+                to={`/detail/${course.maKhoaHoc}`}
+                target="_blank"
+                onClick={() =>
+                  dangKyKhoaHoc(course.maKhoaHoc, userLogin.taiKhoan)
+                }
+                className="rounded-xl bg-blue-500 px-6 py-2 text-md text-gray-50 font-bold"
               >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx={12} cy={12} r={3} />
-              </svg>
-              {course.luotXem}K
-            </span>
-            <span className=" text-gray-800 inline-flex items-center leading-none text-sm">
-              <svg
-                className="w-4 h-4 mr-1"
-                stroke="currentColor"
-                strokeWidth={2}
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-              </svg>
-              6
-            </span>
+                Đăng ký
+              </NavLink>
+            </div>
           </div>
         </div>
-      </div>
-      {/* 6 items/page */}
-      {(idx+1)%6 === 0 ? <br /> : ''}
-    </div>
-    })
-  }
-
-  const onChange = page => {
-    console.log(page);
-    setCurrent(page);
+      );
+    });
   };
 
-  return (
-    <div className="home">
-      {/* HOME-BANNER */}
-      <Banner />
-      {/* HOME - DANHSACHKHOAHOC LIST */}
-      {/* LIST COURSE */}
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-4 mx-auto">
-          <h3 className="text-3xl">Các khóa học mới nhất</h3>
+ 
 
-          <div className="flex flex-wrap -m-4">
-            {renderCourseList()}
-          </div>
-          <div className="flex justify-center my-6">
-          <Pagination current={current} onChange={onChange} total={50} />
-          </div>
-        </div>
-      </section>
+  return (
+    <div class="bg-gray-100">
+      {/* HOME-BANNER */}
+      <Banner2 />
+      <h3 className="text-4xl py-12 text-center font-bold text-gray-700">CÁC KHÓA HỌC MỚI NHẤT</h3>
+
+      <div className="min-h-screen max-w-5xl mx-auto place-content-center justify-center justify-items-center grid md:grid-cols-2 lg:grid-cols-3 gap-x-14 gap-y-5">
+        {renderCourseList()}
+      </div>
     </div>
   );
 }

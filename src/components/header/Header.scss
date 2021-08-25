@@ -17,3 +17,7 @@
     border: none;
     outline: none;
 }
+.ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover {
+    background-color:#42A7FA !important;
+    color: white;
+}
