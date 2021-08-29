@@ -1,4 +1,4 @@
-import { CONFIRM_COURSE, CONFIRM_USER, COURSE_LIST_REVIEWED, COURSE_LIST_REVIEWING, DELETE_COURSE, DELETE_USER, GET_LIST_COURSE_AD, GET_LIST_USER_AD, USER_LIST_REVIEWED, USER_LIST_REVIEWING } from "../actions/types/AdminType";
+import { CONFIRM_COURSE, CONFIRM_USER, COURSE_LIST_REVIEWED, COURSE_LIST_REVIEWING, DELETE_COURSE, DELETE_COURSE_IN_COURSE_LIST, DELETE_USER, DELETE_USER_IN_USER_LIST, GET_LIST_COURSE_AD, GET_LIST_USER_AD, USER_LIST_REVIEWED, USER_LIST_REVIEWING } from "../actions/types/AdminType";
 
 const initialState = {
     userListAd: [],
@@ -82,7 +82,20 @@ const initialState = {
         state.userListReviewed = userListReviewedUpdate
         return {...state}
       }
+
+      case DELETE_USER_IN_USER_LIST: {
+        let userListAdUpdate = [...state.userListAd]
+        userListAdUpdate = userListAdUpdate.filter(user => user.taiKhoan != action.payload)
+        state.userListAd = userListAdUpdate
+        return {...state}
+      }
   
+      case DELETE_COURSE_IN_COURSE_LIST: {
+        let courseListAdUpdate = [...state.courseListAd]
+        courseListAdUpdate = courseListAdUpdate.filter(course => course.maKhoaHoc != action.payload)
+        state.courseListAd = courseListAdUpdate
+        return {...state}
+      }
       default: {
           return {...state}
       }

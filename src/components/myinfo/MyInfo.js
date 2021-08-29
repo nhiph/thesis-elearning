@@ -26,6 +26,9 @@ export default function MyInfo() {
           <h1 className="text-gray-600 text-3xl text-center">
             Thông tin cá nhân
           </h1>
+          <div className="text-red-600 pb-4">
+            Bạn chỉ được phép cập nhật họ tên, mật khẩu, số điện thoại, và mã loại người dùng
+          </div>
           <div class="grid grid-cols-4 gap-4">
             <div className="col-span-1 text-xl">
               <p>Tài khoản</p>

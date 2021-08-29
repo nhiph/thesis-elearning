@@ -3,7 +3,7 @@ import './Banner2.scss'
 
 export default function Banner2() {
   return (
-    <header>
+    <header className="header-banner">
       <div className="overlay" />
       <video
         playsInline="playsinline"

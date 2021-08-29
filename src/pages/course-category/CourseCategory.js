@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import ScrollTop from "../../components/scrolltop/ScrollTop";
 import {
   getCourseCategoryAction,
   registerCourseAction,
 } from "../../redux/actions/CourseAction";
+import { Pagination } from "antd";
 
 export default function CourseCategory(props) {
   const { courseCategoryList } = useSelector((state) => state.CourseReducer);
   const dispatch = useDispatch();
   const { userLogin } = useSelector((state) => state.UserReducer);
-  console.log(userLogin?.maNhom);
+  const [current, setCurrent] = useState(1);
+
   useEffect(() => {
     let maDanhMuc = props.match.params.category;
     let maNhom = "GP01";
@@ -30,8 +33,24 @@ export default function CourseCategory(props) {
     dispatch(action);
   };
 
-  const renderCourseCategoryList = () => {
-    return courseCategoryList?.map((course, idx) => {
+  const paginate = (arr, size) => {
+    return arr.reduce((acc, val, i) => {
+      let idx = Math.floor(i / size)
+      let page = acc[idx] || (acc[idx] = [])
+      page.push(val)
+      return acc
+    }, [])
+  }
+  let pages = paginate(courseCategoryList, 9)
+  // let pageNumber = Math.ceil(courseCategoryList.length/9)
+
+  const renderCourseCategoryList = (currentPage) => {
+    if(!pages[currentPage]) {
+      return <div className=" text-red-700 flex justify-center items-center ">
+        Không tìm thấy khóa học nào!
+      </div>
+    }
+    return pages[currentPage]?.map((course, idx) => {
       return (
         <div className="bg-white shadow-2xl rounded-xl overflow-hidden max-w-xs order-first lg:order-none mb-4">
           <div>
@@ -96,13 +115,24 @@ export default function CourseCategory(props) {
     });
   };
 
+  const onChange = page => {
+    console.log(page)
+    setCurrent(page)
+    renderCourseCategoryList(page-1)
+    window.scrollTo(0, 0)
+  }
+
   return (
     <div class="bg-gray-100">
       <h3 className="text-4xl py-12 text-center font-bold text-gray-700">CÁC KHÓA HỌC MỚI NHẤT</h3>
       <div className="max-w-5xl mx-auto place-content-center justify-center justify-items-center grid md:grid-cols-2 lg:grid-cols-3 gap-x-14 gap-y-5">
-      {renderCourseCategoryList()}
+      {renderCourseCategoryList(current-1)}
         
       </div>
+      <div className="flex justify-center items-center py-8">
+        {courseCategoryList.length > 0 ? <Pagination current={current} onChange={onChange} total={courseCategoryList.length} /> : ''}        
+      </div>
+      <ScrollTop />
     </div>
   );
 }

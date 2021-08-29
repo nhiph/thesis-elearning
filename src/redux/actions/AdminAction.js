@@ -1,7 +1,7 @@
 import { data } from 'autoprefixer';
 import axios from 'axios';
 import { ACCESSTOKEN } from '../../util/setting';
-import { COURSE_LIST_REVIEWED, COURSE_LIST_REVIEWING, USER_LIST_REVIEWING, USER_LIST_REVIEWED, CONFIRM_COURSE, DELETE_COURSE, GET_LIST_COURSE_AD, GET_LIST_USER_AD, DELETE_USER, CONFIRM_USER } from './types/AdminType';
+import { COURSE_LIST_REVIEWED, COURSE_LIST_REVIEWING, USER_LIST_REVIEWING, USER_LIST_REVIEWED, CONFIRM_COURSE, DELETE_COURSE, GET_LIST_COURSE_AD, GET_LIST_USER_AD, DELETE_USER, CONFIRM_USER, DELETE_USER_IN_USER_LIST, DELETE_COURSE_IN_COURSE_LIST } from './types/AdminType';
 
 export const getCourseList = (MaNhom, page) => {
     return async dispatch => {
@@ -227,6 +227,53 @@ export const deleteUser = (infoConfirm) => {
             })
         }catch(err) {
             console.log('err', err)
+        }
+    }
+}
+
+export const deleteAccountUser = (taikhoan) => {
+    return async dispatch => {
+        try {
+            console.log(taikhoan)
+            let result = await axios({
+                url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taikhoan}`,
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(ACCESSTOKEN)}`,
+                },
+            })
+            console.log("result", result)
+            dispatch({
+                type: DELETE_USER_IN_USER_LIST,
+                payload: taikhoan
+            })
+        }catch(err) {
+            alert('Không thể xóa người dùng đã được ghi danh!')
+            // console.log("nhiph", err)
+        }
+    }
+}
+
+export const deleteCourseCode = (maKhoaHoc) => {
+    return async dispatch => {
+        try{
+            console.log(maKhoaHoc)
+            let result = await axios({
+                url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`,
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(ACCESSTOKEN)}`,
+                },
+            })
+            console.log("result", result)
+            dispatch({
+                type: DELETE_COURSE_IN_COURSE_LIST,
+                payload: maKhoaHoc
+            })
+
+        }catch(err) {
+            alert('Không thể xóa khóa học đã được được ghi danh!')
+            // console.log(err)
         }
     }
 }

@@ -1,0 +1,22 @@
+#myBtnScroll {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    z-index: 99;
+    font-size: 18px;
+    border: 3px solid #3A82F6;
+    color: #3A82F6;
+    // background-color: #3A82F6;
+    color: white;
+    cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 50%;
+  }
+  
+  #myBtnScroll:hover {
+    background-color: transparent;
+  }
+  #myBtnScroll:focus {
+    outline: none;
+  }

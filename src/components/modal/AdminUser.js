@@ -12,6 +12,8 @@ export default function AdminUser(props) {
   const { courseListReviewing } = useSelector((state) => state.AdminReducer);
   const { courseListReviewed } = useSelector((state) => state.AdminReducer);
   const dispatch = useDispatch();
+  // console.log("courseListReviewing", courseListReviewing)
+  // console.log("courseListReviewed", courseListReviewed)
   const showModal = () => {
     let taiKhoan = { taiKhoan: props.taiKhoan };
     let actionReviewing = getCourseListReviewing(taiKhoan);

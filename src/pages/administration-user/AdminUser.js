@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './AdminUser.scss'
 import { Input } from "antd";
-import {getUserList} from '../../redux/actions/AdminAction'
+import {deleteAccountUser, getUserList} from '../../redux/actions/AdminAction'
 import {useSelector, useDispatch} from 'react-redux'
 import { Pagination } from 'antd'
 import AdminUserModal from '../../components/modal/AdminUser'
@@ -13,6 +13,8 @@ export default function AdminCourse() {
   const {userListAd} = useSelector(state => state.AdminReducer)
   const {userLogin} = useSelector(state => state.UserReducer)
   const dispatch = useDispatch()
+
+  console.log("userLogin", userLogin)
   
   useEffect(() => {
     if(userLogin) {
@@ -23,11 +25,19 @@ export default function AdminCourse() {
 
   const onSearch = (value) => console.log(value);
 
+  // console.log("userListAd",userListAd)
+
   const onChange = page => {
     setCurrent(page);
     let action = getUserList(userLogin.maNhom, page)
     dispatch(action)
   };
+
+  const onDeleteUser = (taiKhoan) => {
+    console.log(taiKhoan)
+    let aciton = deleteAccountUser(taiKhoan)
+    dispatch(aciton)
+  }
 
   const renderUserList = () => {
     return userListAd?.map((user, idx) => {
@@ -41,7 +51,7 @@ export default function AdminCourse() {
         <div className="flex justify-center items-center">
           <AdminUserModal taiKhoan={user.taiKhoan}/>
           <button className="mx-4 action-btn"><i class="fa fa-edit"></i></button>
-          <button className=" action-btn"><i class="fa fa-trash"></i></button>
+          <button className=" action-btn" onClick={() => onDeleteUser(user.taiKhoan)}><i class="fa fa-trash"></i></button>
         </div>
       </td>
     </tr>

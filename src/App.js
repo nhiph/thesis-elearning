@@ -17,6 +17,7 @@ import CourseCategory from "./pages/course-category/CourseCategory";
 import CourseFind from "./pages/course-find/CourseFind";
 import DropdownMenu from "./components/dropdown/DropdownMenu";
 import Banner2 from "./components/banner/Banner2";
+import ScrollTop from "./components/scrolltop/ScrollTop";
 
 export const history = createBrowserHistory();
 
@@ -59,6 +60,7 @@ export default function App() {
         <HomeTemplate exact component={TabMypage} path="/mypage" />
         <HomeTemplate exact component={CourseCategory} path="/category/:category" />
         <HomeTemplate exact component={CourseFind} path="/filter/:keyword" />
+        <HomeTemplate exact component={ScrollTop} path="/scroll" />
       </Switch>
     </BrowserRouter>
   );

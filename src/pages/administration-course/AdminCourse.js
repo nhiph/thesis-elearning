@@ -5,10 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Pagination } from "antd";
 import { getListCourseAction } from "../../redux/actions/CourseAction";
 import AdminCourseModal from '../../components/modal/AdminCourse'
-import { getCourseList } from "../../redux/actions/AdminAction";
+import { deleteCourseCode, getCourseList } from "../../redux/actions/AdminAction";
+import { Redirect } from "react-router-dom";
 
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
+
 
 export default function AdminCourse() {
   const [current, setCurrent] = useState(1);
@@ -16,12 +18,25 @@ export default function AdminCourse() {
   const { courseListAd } = useSelector((state) => state.AdminReducer);
   const dispatch = useDispatch();
 
+ 
+
+
   useEffect(() => {
     if(userLogin) {
       let action = getCourseList(userLogin.maNhom, current);
       dispatch(action);
     }
   }, [userLogin]);
+
+  if(userLogin && userLogin.maLoaiNguoiDung != 'GV') {
+    return <Redirect to="/" />
+  }
+
+  const onDeleteCourse = (maKhoaHoc) => {
+    // console.log(maKhoaHoc)
+    let action = deleteCourseCode(maKhoaHoc)
+    dispatch(action)
+  }
 
   const renderCourseList = () => {
     return courseListAd?.map((course, idx) => {
@@ -38,7 +53,7 @@ export default function AdminCourse() {
         <div className="flex justify-center items-center">
           <AdminCourseModal maKhoaHoc={course.maKhoaHoc}/>
           <button className="mx-4 action-btn"><i class="fa fa-edit"></i></button>
-          <button className=" action-btn"><i class="fa fa-trash"></i></button>
+          <button className=" action-btn" onClick={() => onDeleteCourse(course.maKhoaHoc)}><i class="fa fa-trash"></i></button>
         </div>
       </td>
     </tr>

@@ -53,7 +53,7 @@ export default function UpdateInfo() {
           <div className="grid grid-cols-2 gap-4">
             <div className="form-group">
               <p>Tài khoản</p>
-              <input disabled value={userLogin.taiKhoan} name="taiKhoan" className="form-control"
+              <input style={{cursor: 'not-allowed'}} disabled value={userLogin.taiKhoan} name="taiKhoan" className="form-control update-info"
               onChange={handleChange}
               onBlur={formik.handleBlur}
               />
@@ -63,7 +63,7 @@ export default function UpdateInfo() {
               <p>Họ tên</p>
               <input 
                 value={formik.values.hoTen} 
-                name="hoTen" className="form-control" 
+                name="hoTen" className="form-control update-info" 
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
               />
@@ -75,7 +75,7 @@ export default function UpdateInfo() {
               <p>Mật khẩu</p>
               <input 
                 type="password"
-                value={formik.values.matKhau} name="matKhau" className="form-control" 
+                value={formik.values.matKhau} name="matKhau" className="form-control update-info" 
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
               />
@@ -87,7 +87,8 @@ export default function UpdateInfo() {
               <p>Email</p>
               <input 
                 disabled
-                value={userLogin.email} name="email" className="form-control" 
+                style={{cursor: 'not-allowed'}}
+                value={userLogin.email} name="email" className="form-control update-info" 
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
               />
@@ -101,7 +102,7 @@ export default function UpdateInfo() {
               <p>Số điện thoại</p>
               <input 
                 value={formik.values.soDT} 
-                name="soDT" className="form-control" 
+                name="soDT" className="form-control update-info" 
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
               />
@@ -113,7 +114,8 @@ export default function UpdateInfo() {
               <p>Mã nhóm</p>
               <select 
                 disabled
-                value={userLogin.maNhom} name="maNhom" className="form-control"
+                style={{cursor: 'not-allowed'}}
+                value={userLogin.maNhom} name="maNhom" className="form-control update-info"
                 onChange={handleChange}
               >
                 <option value="GP01">Group 1</option>
@@ -127,7 +129,7 @@ export default function UpdateInfo() {
             <div className="form-group">
               <p>Mã loại người dùng</p>
               <select 
-                value={formik.values.maLoaiNguoiDung} name="maLoaiNguoiDung" className="form-control"
+                value={formik.values.maLoaiNguoiDung} name="maLoaiNguoiDung" className="form-control update-info"
                 onChange={handleChange}
                 >
                 <option value="HV">HV</option>

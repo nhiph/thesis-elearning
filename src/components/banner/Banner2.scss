@@ -2,7 +2,7 @@
     --primary-color:rgb(0, 174, 239);
   }
   
-  header {
+  .header-banner {
     position: relative;
     background-color: black;
     height: 75vh;
@@ -11,7 +11,7 @@
     overflow: hidden;
   }
   
-  header video {
+  .header-banner video {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -26,12 +26,12 @@
     transform: translateX(-50%) translateY(-50%);
   }
   
-  header .container {
+  .header-banner .container {
     position: relative;
     z-index: 2;
   }
   
-  header .overlay {
+  .header-banner .overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -43,10 +43,10 @@
   }
   
   @media (pointer: coarse) and (hover: none) {
-    header {
+    .header-banner {
       background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
     }
-    header video {
+    .header-banner video {
       display: none;
     }
   }

@@ -21,3 +21,39 @@
     background-color:#42A7FA !important;
     color: white;
 }
+
+.ant-input-group {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 2;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    position: relative;
+    display: table;
+    width: 400px !important;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.ant-btn.btn-account {
+text-align: left !important;
+background-color: transparent !important;
+border: none !important;
+}
+.ant-btn.btn-account:focus {
+    border: none;
+    outline: none;
+}
+.ant-btn.btn-facebook {
+    background-color: #4267B2 !important;
+    border: none !important;
+    color: white;
+}
+.ant-btn.btn-google {
+    background-color: red;
+    border: none !important;
+    color: white;
+}
