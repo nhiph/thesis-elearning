@@ -19,8 +19,8 @@ export default function Banner2() {
       <div className="container h-100">
         <div className="pl-32 pt-20 flex justify-start items-center">
           <div>
-            <h3 className="text-yellow-500 text-5xl font-bold">Khởi đầu sự nghiệp của bạn</h3>
-            <p className="text-3xl text-gray-50">
+            <h3 className="text-yellow-500 text-5xl font-bold title1">Khởi đầu sự nghiệp của bạn</h3>
+            <p className="text-3xl text-gray-50 title2">
             Trở thành lập trình viên chuyên nghiệp tại Cybersoft
             </p>
             <div className="welcome-btn-group mt-2">

@@ -42,6 +42,7 @@
 text-align: left !important;
 background-color: transparent !important;
 border: none !important;
+box-shadow: none !important;
 }
 .ant-btn.btn-account:focus {
     border: none;
@@ -56,4 +57,10 @@ border: none !important;
     background-color: red;
     border: none !important;
     color: white;
+}
+.newImg {
+    transition: transform .2s;
+    &:hover {
+        transform: scale(1.2);
+    }
 }

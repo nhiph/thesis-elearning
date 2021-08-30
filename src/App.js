@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 // setup router
-import { BrowserRouter, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter, Router, Redirect, Switch } from "react-router-dom";
 import Home from "./pages/home/Home";
 import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 import CourseDetail from "./pages/course-detail/CourseDetail";
@@ -18,6 +18,7 @@ import CourseFind from "./pages/course-find/CourseFind";
 import DropdownMenu from "./components/dropdown/DropdownMenu";
 import Banner2 from "./components/banner/Banner2";
 import ScrollTop from "./components/scrolltop/ScrollTop";
+import Carousel from "./components/carousel/Carousel";
 
 export const history = createBrowserHistory();
 
@@ -51,8 +52,10 @@ export default function App() {
     }
   }, [])
 
+
+  console.log(process.env)
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>CourseFind
         <AdminTemplate exact component={AdminUser} path="/admin" />
         <HomeTemplate exact component={Home} path="/" />
@@ -60,8 +63,9 @@ export default function App() {
         <HomeTemplate exact component={TabMypage} path="/mypage" />
         <HomeTemplate exact component={CourseCategory} path="/category/:category" />
         <HomeTemplate exact component={CourseFind} path="/filter/:keyword" />
-        <HomeTemplate exact component={ScrollTop} path="/scroll" />
+        {/* <HomeTemplate exact component={ScrollTop} path="/scroll" /> */}
+        <HomeTemplate exact component={Carousel} path="/carousel" />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }

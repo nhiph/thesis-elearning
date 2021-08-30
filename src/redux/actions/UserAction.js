@@ -1,7 +1,24 @@
 import axios from 'axios'
 import {ACCESSTOKEN} from '../../util/setting'
-import {DANG_NHAP} from '../actions/types/UserType'
+import {DANG_NHAP, GET_LIST_ALL_USER} from '../actions/types/UserType'
 import { REGISTER_COURSE } from './types/CoursesType'
+
+export const getListAllUser = () => {
+    return async (dispatch) => {
+        try {
+            let result = await axios({
+                url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01`,
+                method: 'GET'
+            })
+            dispatch({
+                type: GET_LIST_ALL_USER,
+                payload: result.data
+            })
+        }catch(err) {
+            console.log(err)
+        }
+    }
+}
 
 export const signUpAction = (info) => {
     return async (dispatch) => {

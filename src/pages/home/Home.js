@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 import { Pagination } from "antd";
 import Banner2 from "../../components/banner/Banner2";
 import ScrollTop from "../../components/scrolltop/ScrollTop";
+import Carousel from "../../components/carousel/Carousel";
 
 export default function Home() {
   const { courseList } = useSelector((state) => state.CourseReducer);
@@ -116,13 +117,15 @@ export default function Home() {
     console.log(page)
     setCurrent(page)
     renderCourseList(page-1)
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 1000)
   }
 
   return (
     <div class="bg-gray-100">
       {/* HOME-BANNER */}
       <Banner2 />
+      <Carousel />
+
       <h3 className="text-4xl py-12 text-center font-bold text-gray-700">CÁC KHÓA HỌC MỚI NHẤT</h3>
 
       <div className="max-w-5xl mx-auto place-content-center justify-center justify-items-center grid md:grid-cols-2 lg:grid-cols-3 gap-x-14 gap-y-5">

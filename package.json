@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "formik": "^2.2.9",
     "history": "^5.0.0",
+    "jquery": "^3.6.0",
     "lodash": "^4.17.21",
     "node-sass": "4.14.1",
     "react": "^17.0.2",
@@ -51,6 +52,6 @@
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.9"
   }
 }

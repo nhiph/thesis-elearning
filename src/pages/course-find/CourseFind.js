@@ -72,10 +72,10 @@ export default function CourseFind(props) {
 
   return (
     <div className="container py-10 mx-auto text-center">
-      <h1 className="text-3xl">Tìm thấy n khóa học</h1>
-      <section className="text-gray-600 body-font">
+      <h1 className="text-3xl">Tìm thấy {courseFilterList.length} khóa học</h1>
+      { courseFilterList.length > 0 ? (<section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">{renderCourseList()}</div>
-      </section>
+      </section>) : ''}
     </div>
   );
 }

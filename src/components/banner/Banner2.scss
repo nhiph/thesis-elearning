@@ -1,94 +1,147 @@
-:root{
-    --primary-color:rgb(0, 174, 239);
-  }
-  
+:root {
+  --primary-color: rgb(0, 174, 239);
+}
+
+.header-banner {
+  position: relative;
+  background-color: black;
+  height: 75vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.header-banner video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.header-banner .container {
+  position: relative;
+  z-index: 2;
+}
+
+.header-banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+@media (pointer: coarse) and (hover: none) {
   .header-banner {
-    position: relative;
-    background-color: black;
-    height: 75vh;
-    min-height: 25rem;
-    width: 100%;
-    overflow: hidden;
+    background: url("https://source.unsplash.com/XT5OInaElMw/1600x900") black
+      no-repeat center center scroll;
   }
-  
   .header-banner video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: 0;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
+    display: none;
   }
-  
-  .header-banner .container {
-    position: relative;
-    z-index: 2;
+}
+
+/*========= BANNER =============*/
+.dento-btn {
+  position: relative;
+  z-index: 1;
+  min-width: 170px;
+  height: 46px;
+  line-height: 42px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  padding: 0 20px;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 2px;
+  background-color: var(--primary-color);
+  -webkit-transition: all 500ms;
+  -o-transition: all 500ms;
+  transition: all 500ms;
+  border: 2px solid var(--primary-color);
+}
+.dento-btn.active,
+.dento-btn:focus,
+.dento-btn:hover {
+  box-shadow: none;
+  background-color: transparent;
+  color: #00aeef;
+}
+
+.counter-count {
+  font-size: 25px;
+  font-weight: 600;
+  position: relative;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 0;
+}
+.count-up .counter-label {
+  text-align: center;
+}
+h6.counter-label {
+  font-size: 20px;
+}
+
+.title1 {
+  animation: fadeIn 1s ease-in both;
+  animation-delay: 0.5s;
+}
+.title2 {
+  animation: bottomFadeOut 1s ease-in both;
+  animation-delay: 1s;
+  animation-duration: 2s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
   }
-  
-  .header-banner .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: black;
-    opacity: 0.5;
-    z-index: 1;
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
-  
-  @media (pointer: coarse) and (hover: none) {
-    .header-banner {
-      background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
-    }
-    .header-banner video {
-      display: none;
-    }
+}
+@keyframes bottomFadeOut {
+  0% {
+    opacity: 0;
   }
-  
-  /*========= BANNER =============*/
-  .dento-btn{
-     position: relative;
-      z-index: 1;
-      min-width: 170px;
-      height: 46px;
-      line-height: 42px;
-      font-size: 14px;
-      font-weight: 600;
-      display: inline-block;
-      padding: 0 20px;
-      text-align: center;
-      color: #ffffff;
-      border-radius: 2px;
-      background-color: var(--primary-color);
-      -webkit-transition: all 500ms;
-      -o-transition: all 500ms;
-      transition: all 500ms;
-      border: 2px solid var(--primary-color);
+
+  75% {
+    opacity: 0.7;
   }
-  .dento-btn.active, .dento-btn:focus, .dento-btn:hover {
-      box-shadow: none;
-      background-color: transparent;
-      color: #00aeef;
+
+  100% {
+    opacity: 1;
   }
-  
-  .counter-count
-  {
-      font-size: 25px;
-      font-weight: 600;
-      position: relative;
-      color: var(--primary-color);
-      text-align: center;
-    margin-bottom:0;
+}
+
+@keyframes upDown {
+  0% {
+
   }
-  .count-up .counter-label {
-    text-align:center
+  25% {
+      transform: translateY(-50px);
   }
-  h6.counter-label{
-    font-size:20px;
+  50% {
+      transform: translateY(0);
   }
+  75% {
+      transform: translateY(50px);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}

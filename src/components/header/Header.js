@@ -40,13 +40,18 @@ export default function Header() {
   const dispatch = useDispatch();
 
   const onSearch = (value) => {
+    console.log(value)
+    window.location.href = `http://localhost:3000/filter/${value}`;
+    // history.push(`/filter/:${value}`)
+    // if(value) {
+    //   return <Redirect to={`/filter/:${value}`} />;
+    // }
     // let maNhom = 'GP01';
     // if(userLogin.maNhom) {
-    //   maNhom = userLogin.maNhom
+    //   maNhom = userLogin.maNhomis
     // }
     // let action = getListCourseFilterAction(value, maNhom);
     // dispatch(action);
-    return <Redirect to={`/filter/:${value}`} />;
   };
 
   useEffect(() => {
@@ -165,7 +170,7 @@ export default function Header() {
         </div>
 
         {/* iconnew */}
-        <img src={newImg} width="70"/>
+        <img src={newImg} width="70" className="newImg"/>
 
         {/* Category - SearchBar */}
         <div className="flex flex-col items-center justify-between">
